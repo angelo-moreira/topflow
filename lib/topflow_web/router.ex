@@ -1,5 +1,6 @@
 defmodule TopflowWeb.Router do
   use TopflowWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,10 +14,20 @@ defmodule TopflowWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", TopflowWeb do
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
+  scope "/" do
     pipe_through :browser
 
-    get "/", PageController, :index
+    pow_routes()
+  end
+
+  scope "/", TopflowWeb do
+    pipe_through [:browser, :protected]
+
+    get("/", PageController, :index)
   end
 
   # Other scopes may use custom stacks.

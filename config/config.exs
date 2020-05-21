@@ -18,6 +18,11 @@ config :topflow, TopflowWeb.Endpoint,
   pubsub_server: Topflow.PubSub,
   live_view: [signing_salt: "wvdEyBUX"]
 
+config :topflow, :pow,
+  user: Topflow.Users.User,
+  repo: Topflow.Repo,
+  web_module: TopflowWeb
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
