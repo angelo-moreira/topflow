@@ -8,7 +8,7 @@ defmodule Topflow.Repo.Migrations.CreateUsers do
       add(:lastname, :string, null: false)
       add(:email, :string, null: false)
       add(:password_hash, :string, null: false)
-      add(:user_role, :string, default: "user")
+      add(:role, :string, default: "user")
 
       add(:suspended, :boolean, default: false)
       add(:verified, :boolean, default: false)

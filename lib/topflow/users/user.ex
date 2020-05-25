@@ -7,7 +7,7 @@ defmodule Topflow.Users.User do
     field :firstname, :string
     field :middlename, :string
     field :lastname, :string
-    field :user_role, :string
+    field :role, :string
     field :suspended, :boolean
     field :verified, :boolean
 
@@ -17,7 +17,14 @@ defmodule Topflow.Users.User do
   def changeset(user_or_changeset, attrs) do
     user_or_changeset
     |> pow_changeset(attrs)
-    |> Ecto.Changeset.cast(attrs, [:firstname, :middlename, :lastname, :user_role, :suspended, :verified])
+    |> Ecto.Changeset.cast(attrs, [
+      :firstname,
+      :middlename,
+      :lastname,
+      :role,
+      :suspended,
+      :verified
+    ])
     |> Ecto.Changeset.validate_required([:firstname, :lastname])
   end
 end
